@@ -1,0 +1,3660 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)http://www.feemic.cn/mooc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="./mooc_files/app.style.css">
+    <meta content="IE=11.0000" http-equiv="X-UA-Compatible">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes">
+    <script src="./mooc_files/hm.js.下载"></script><script src="./mooc_files/jquery.min.js.下载"></script><style type="text/css" abt="234"></style>
+    <script type="text/javascript">
+        function post(url, params) {
+            var temp = document.createElement("form");
+            temp.action = url;
+            temp.method = "post";
+            temp.target = "_blank";
+            temp.style.display = "none";
+            for (var x in params) {
+                var opt = document.createElement("textarea");
+                opt.name = x;
+                opt.value = params[x];
+                temp.appendChild(opt);
+            }
+            document.body.appendChild(temp);
+            temp.submit();
+            return temp;
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tool_expand").click(function () {
+                $("#milk").toggleClass("is-visible");
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function flex() {
+            var qr = document.getElementById('QR');
+            if (qr.style.display === 'none') {
+                qr.style.display='block';
+            }
+            else {
+                qr.style.display='none';
+            }
+            return qr
+        }
+    </script>
+
+
+  <script>//console.log('a')
+</script><script>doAdblock();
+function doAdblock(){
+    (function() {
+        function A() {}
+        A.prototype = {
+            rules: {
+                'pps_pps': {
+                    'find': /^http:\/\/www\.iqiyi\.com\/player\/cupid\/common\/pps_flvplay_s\.swf/,
+                    'replace': 'http://swf.adtchrome.com/pps_20140420.swf'
+                },
+                '17173_in':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFile(Customer)?\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173_in_20150522.swf"
+                },
+                '17173_out':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFileFirstpage\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173_out_20150522.swf"
+                },
+                '17173_live':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream(_firstpage)?\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173_stream_20150522.swf"
+                },
+                '17173_live_out':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream_(custom)?Out\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173.out.Live.swf"
+                }
+            },
+            _done: null,
+            get done() {
+                if(!this._done) {
+                    this._done = new Array();
+                }
+                return this._done;
+            },
+            addAnimations: function() {
+                var style = document.createElement('style');
+                style.type = 'text/css';
+                style.innerHTML = 'object,embed{\
+                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;\
+                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;\
+                -o-animation-duration:.001s;-o-animation-name:playerInserted;\
+                animation-duration:.001s;animation-name:playerInserted;}\
+                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}';
+                document.getElementsByTagName('head')[0].appendChild(style);
+            },
+            animationsHandler: function(e) {
+                if(e.animationName === 'playerInserted') {
+                    this.replace(e.target);
+                }
+            },
+            replace: function(elem) {
+                if (/http:\/\/v.youku.com\/v_show\/.*/.test(window.location.href)){
+                    var tag = document.getElementById("playerBox").getAttribute("player")
+                    if (tag == "adt"){
+                        console.log("adt adv")
+                        return;
+                    }
+                }
+                if(this.done.indexOf(elem) != -1) return;
+                this.done.push(elem);
+                var player = elem.data || elem.src;
+                if(!player) return;
+                var i, find, replace = false;
+                for(i in this.rules) {
+                    find = this.rules[i]['find'];
+                    if(find.test(player)) {
+                        replace = this.rules[i]['replace'];
+                        if('function' === typeof this.rules[i]['preHandle']) {
+                            this.rules[i]['preHandle'].bind(this, elem, find, replace, player)();
+                        }else{
+                            this.reallyReplace.bind(this, elem, find, replace)();
+                        }
+                        break;
+                    }
+                }
+            },
+            reallyReplace: function(elem, find, replace) {
+                elem.data && (elem.data = elem.data.replace(find, replace)) || elem.src && ((elem.src = elem.src.replace(find, replace)) && (elem.style.display = 'block'));
+                var b = elem.querySelector("param[name='movie']");
+                this.reloadPlugin(elem);
+            },
+            reloadPlugin: function(elem) {
+                var nextSibling = elem.nextSibling;
+                var parentNode = elem.parentNode;
+                parentNode.removeChild(elem);
+                var newElem = elem.cloneNode(true);
+                this.done.push(newElem);
+                if(nextSibling) {
+                    parentNode.insertBefore(newElem, nextSibling);
+                } else {
+                    parentNode.appendChild(newElem);
+                }
+            },
+            init: function() {
+                var handler = this.animationsHandler.bind(this);
+                document.body.addEventListener('webkitAnimationStart', handler, false);
+                document.body.addEventListener('msAnimationStart', handler, false);
+                document.body.addEventListener('oAnimationStart', handler, false);
+                document.body.addEventListener('animationstart', handler, false);
+                this.addAnimations();
+            }
+        };
+        new A().init();
+    })();
+}
+// 20140730
+(function cnbeta() {
+    if (document.URL.indexOf('cnbeta.com') >= 0) {
+        var elms = document.body.querySelectorAll("p>embed");
+        Array.prototype.forEach.call(elms, function(elm) {
+            elm.style.marginLeft = "0px";
+        });
+    }
+})();
+//baidu
+if(document.URL.indexOf('www.baidu.com') >= 0){
+    if(document && document.getElementsByTagName && document.getElementById && document.body){
+        var aa = function(){
+            var all = document.body.querySelectorAll("#content_left div,#content_left table");
+            for(var i = 0; i < all.length; i++){
+                if(/display:\s?(table|block)\s!important/.test(all[i].getAttribute("style"))){all[i].style.display= "none";all[i].style.visibility='hidden';}
+            }
+            all = document.body.querySelectorAll('.result.c-container[id="1"]');
+            //if(all.length == 1) return;
+            for(var i = 0; i < all.length; i++){
+                if(all[i].innerHTML && all[i].innerHTML.indexOf('广告')>-1){
+                    all[i].style.display= "none";all[i].style.visibility='hidden';
+                }
+            }
+        }
+        aa();
+        document.getElementById('wrapper_wrapper').addEventListener('DOMSubtreeModified',aa)
+    };
+}
+// 20140922
+(function kill_360() {
+    if (document.URL.indexOf('so.com') >= 0) {
+        document.getElementById("e_idea_pp").style.display = none;
+    }
+})();
+if (document.URL.indexOf("tv.sohu.com") >= 0){
+    if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+}
+if (document.URL.indexOf("56.com") >= 0){
+    if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+}
+if (document.URL.indexOf("iqiyi.com") >= 0){
+    if (document.cookie.indexOf("player_forcedType=h5_VOD")==-1){
+        document.cookie='player_forcedType=h5_VOD'
+        if(localStorage.reloadTime && Date.now() - parseInt(localStorage.reloadTime)<60000){
+            console.log('no reload')
+        }else{
+            location.reload()
+            localStorage.reloadTime = Date.now();
+        }
+    }
+}
+</script><style type="text/css">object,embed{                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;                -o-animation-duration:.001s;-o-animation-name:playerInserted;                animation-duration:.001s;animation-name:playerInserted;}                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}</style><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+  <body>
+    
+    
+  <div class="o-block _u-width-100p u-p-small u-collapse _u-mb-small u-width-100p@lg-">
+    <div class="o-block u-width-100p _u-width-100p u-bg-main u-shadow-medium">
+     <div class="o-block__cell u-px-small u-py-tiny u-border-bottom">
+      <div class="o-stack o-stack--center o-stack--splitted">
+       <div class="o-stack__cell">
+        <div class="o-stack o-stack--center">
+         <div class="o-stack__cell u-mr-tiny">
+         </div>
+         <div class="o-stack__cell">
+             <a class="c-link-gray" href="http://www.feemic.cn/mooc_help"><p>
+                 <b>慕课视频获取(模块优化 - 批量PDF暂时下线)</b></p></a>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="o-block__cell u-p-small _u-mb-auto u-collapse">
+      <div class="c-blockquote u-px-medium u-py-none">
+          <p><b>哈尔滨工业大学：计算机网络</b></p>
+          <p><b>主讲老师：李全龙</b></p>
+          <p><b>第4次开课:  正在进行</b></p>
+          
+          
+              <p><a class="c-link-gray" href="http://www.feemic.cn/mooc/1002009011"><b>点击查看上一次开课课程</b></a></p>
+          
+
+          <a id="tool_expand" class="c-link-gray" href="javascript:test()" target="_blank">
+              <b>小工具箱</b><span class="c-icon c-icon--main"></span>
+          </a>
+          <ul id="milk" class="c-menu c-menu--dropdown">
+              <li class="c-menu__item">
+                  <a class="c-menu__link" href="http://www.feemic.cn/mooc_search/1002210011" target="_blank">
+                      <span class="c-menu__text">生成可收藏网址</span></a>
+              </li>
+              
+              <li class="c-menu__separator"></li>
+
+              <li class="c-menu__item">
+                  <div id="form" class="c-menu__link">
+                      <form method="POST" class="input-group">
+                          <input id="csrf_token" name="csrf_token" type="hidden" value="Ijk5NmZjNmZhY2IzMmEyYWY5M2FkNzdjN2FmNWI1MGMyNWQwNDZjZmIi.DQwMgQ.Dbqr5G1Zgv4lZde2635E84DWb-M">
+                           <input id="tid" name="tid" type="hidden" value="1002210011">
+                          <div style="font-size: small;">
+                              <input type="submit" class="btn btn-search" style="padding-left:0;" value="批量重命名脚本">
+                          </div>
+                      </form>
+                  </div>
+              </li>
+              <li class="c-menu__separator"></li>
+              <li class="c-menu__item"><a class="c-menu__link" href="http://www.feemic.cn/get_blog?owner=feemic&amp;repo=blog&amp;path=/%E5%B7%A5%E5%85%B7/%E6%85%95%E8%AF%BE%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.md#toc-6"><span class="c-menu__text">点击查看小工具使用帮助</span></a>
+              </li>
+          </ul>
+      </div>
+    
+        <br> <b>第1周 计算机网络概述（上）(2h12m02s) </b><br>
+        
+            1.1 计算机网络基本概念(20m40s)
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2029046_hd.mp4" target="_blank" rel="noreferrer">什么是计算机网络？（11m47s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2029043_hd.mp4" target="_blank" rel="noreferrer">什么是网络协议？(8m53s)</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426005,unitId:1003406283})">什么是计算机网络？</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424007,unitId:1003406284})">什么是网络协议？</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                
+
+            
+        
+            1.2 计算机网络结构(27m44s)
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2029048_hd.mp4" target="_blank" rel="noreferrer">计算机网络结构(20m52s)</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2029041_hd.mp4" target="_blank" rel="noreferrer">Internet结构(6m52s)</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425007,unitId:1003406289})">计算机网络结构</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424008,unitId:1003406290})">Internet结构</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            1.3 网络核心(1h23m38s)
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2029044_hd.mp4" target="_blank" rel="noreferrer">电路交换(10m24s)</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2034040_hd.mp4" target="_blank" rel="noreferrer">多路复用(21m35s)</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2029047_hd.mp4" target="_blank" rel="noreferrer">报文交换与分组交换（1）(12m59s)</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2028050_hd.mp4" target="_blank" rel="noreferrer">报文交换与分组交换（2）(18m20s)</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2030042_hd.mp4" target="_blank" rel="noreferrer">报文交换与分组交换（3）(20m20s)</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                
+
+            
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427004,unitId:1003406298})">电路交换</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1004628117,unitId:1003406299})">多路复用</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426006,unitId:1003406300})">报文交换与分组交换（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424009,unitId:1003406301})">报文交换与分组交换（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426007,unitId:1003406302})">报文交换与分组交换（3）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第2周 计算机网络概述（下）（2h12m56s） </b><br>
+        
+            1.4 计算机网络性能（30m59s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2030043_hd.mp4" target="_blank" rel="noreferrer">速率、带宽、延迟（20m44s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2034038_hd.mp4" target="_blank" rel="noreferrer">时延带宽积、丢包率、吞吐量（10m15s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425009,unitId:1003406305})">速率、带宽、延迟</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426008,unitId:1003406306})">时延带宽积、丢包率、吞吐量</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            1.5 计算机网络体系结构（1h18m51s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2034041_hd.mp4" target="_blank" rel="noreferrer">计算机网络体系结构概述（17m24s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2030041_hd.mp4" target="_blank" rel="noreferrer">OSI参考模型（1）（18m19s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2034042_hd.mp4" target="_blank" rel="noreferrer">OSI参考模型（2）（21m43s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2029049_hd.mp4" target="_blank" rel="noreferrer">OSI参考模型（3）、TCP/IP参考模型（21m25s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425010,unitId:1003406311})">计算机网络体系结构概述</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426009,unitId:1003406312})">OSI参考模型（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426010,unitId:1003406313})">OSI参考模型（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425011,unitId:1003406314})">OSI参考模型（3）、TCP/IP参考模型</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                
+
+            
+        
+            1.6 计算机网络发展历史（23m06s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/08/26/2030044_hd.mp4" target="_blank" rel="noreferrer">计算机网络与Internet发展历史（23m06s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427005,unitId:1003406317})">计算机网络与Internet发展历史</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第3周 网络应用（上）（3h41m13s） </b><br>
+        
+            2.1 网络应用（层）内容概述（3m10s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/18/2144139_hd.mp4" target="_blank" rel="noreferrer">网络应用（层）内容概述（3m10s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424060,unitId:1003406319})">网络应用（层）内容概述</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                
+
+            
+        
+            2.2 网络应用的基本原理（54m26s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143118_hd.mp4" target="_blank" rel="noreferrer">网络应用体系结构（20m22s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143119_hd.mp4" target="_blank" rel="noreferrer">网络应用进程通信（18m32s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2144103_hd.mp4" target="_blank" rel="noreferrer">网络应用需求（15m32s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427061,unitId:1003406324})">网络应用体系结构_文档</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425078,unitId:1003406325})">网络应用进程通信_文档</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425079,unitId:1003406326})">网络应用需求_文档</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            2.3 Web应用（1h24m13s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143120_hd.mp4" target="_blank" rel="noreferrer">Web应用概述（13m18s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2144105_hd.mp4" target="_blank" rel="noreferrer">HTTP连接类型（18m59s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2145184_hd.mp4" target="_blank" rel="noreferrer">HTTP消息格式（17m11s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2144104_hd.mp4" target="_blank" rel="noreferrer">Cookie技术（14m03s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2146114_hd.mp4" target="_blank" rel="noreferrer">Web缓存技术（20m42s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425080,unitId:1003406332})">Web应用概述</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425081,unitId:1003406333})">HTTP连接类型</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426065,unitId:1003406334})">HTTP消息格式</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424061,unitId:1003406335})">Cookie技术</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425082,unitId:1003406336})">Web缓存技术</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            2.4 Email应用（37m24s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143121_hd.mp4" target="_blank" rel="noreferrer">Email应用概述（19m08s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2144106_hd.mp4" target="_blank" rel="noreferrer">Email消息格式与POP协议（18m16s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427062,unitId:1003406339})">Email应用概述</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425083,unitId:1003406340})">Email消息格式与POP协议</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            2.5 DNS应用（42m00s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143122_hd.mp4" target="_blank" rel="noreferrer">DNS概述（29m55s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2145185_hd.mp4" target="_blank" rel="noreferrer">DNS记录和消息（12m05s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426066,unitId:1003406343})">DNS概述</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425084,unitId:1003406344})">DNS记录和消息</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第4周 网络应用（下）（2h53m36s） </b><br>
+        
+            2.6 P2P应用（41m23s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2145186_hd.mp4" target="_blank" rel="noreferrer">P2P应用_原理与文件分发（21m17s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2145187_hd.mp4" target="_blank" rel="noreferrer">P2P应用_索引（20m04s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427063,unitId:1003406347})">P2P应用_原理与文件分发</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425085,unitId:1003406348})">P2P应用_索引</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            2.7 Socket编程（2h12m13s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/19/2144204_hd.mp4" target="_blank" rel="noreferrer">Socket编程（1）（13m42s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/19/2146214_hd.mp4" target="_blank" rel="noreferrer">Socket编程（2）（16m33s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/19/2145293_hd.mp4" target="_blank" rel="noreferrer">Socket编程（3）（21m12s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/19/2143215_hd.mp4" target="_blank" rel="noreferrer">Socket编程（4）（27m08s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/19/2143216_hd.mp4" target="_blank" rel="noreferrer">Socket编程（5）（22m11s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/19/2145294_hd.mp4" target="_blank" rel="noreferrer">Socket编程（6）（31m27s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427094,unitId:1003406355})">Socket编程（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424108,unitId:1003406356})">Socket编程（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427095,unitId:1003406357})">Socket编程（3）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427096,unitId:1003406358})">Socket编程（4）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427097,unitId:1003406359})">Socket编程（5）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425126,unitId:1003406360})">Socket编程（6）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第5周 传输层（上）（2h50m27s） </b><br>
+        
+            3.1 传输层服务（13m03s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143123_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_300_开篇（3m11s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2146115_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_301_传输层概述（9m52s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425088,unitId:1003406363})">计算机网络MOOC_300_开篇</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426068,unitId:1003406364})">计算机网络MOOC_301_传输层概述</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            3.2 复用和分用（18m26s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143124_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_302_复用和解复用（18m26s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424062,unitId:1003406366})">计算机网络MOOC_302_复用和解复用</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            3.3 无连接传输协议-UDP（17m13s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2144107_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_303_UDP（17m13s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424063,unitId:1003406368})">计算机网络MOOC_303_UDP</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            3.4 可靠数据传输的基本原理（1h18m01s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2146116_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_304_可靠数据传输概述（22m23s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2145189_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_305_rdt2.0（19m30s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2146117_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_306_rdt2.1（15m16s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2146118_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_307_rdt3.0（20m52s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425089,unitId:1003406373})">计算机网络MOOC_304_可靠数据传输概述</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426069,unitId:1003406374})">计算机网络MOOC_305_rdt2.0</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427065,unitId:1003406375})">计算机网络MOOC_306_rdt2.1</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424064,unitId:1003406376})">计算机网络MOOC_307_rdt3.0</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            3.5 滑动窗口协议（43m44s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2145190_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_308_滑动窗口协议（8m39s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2146119_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_309_GBN（17m09s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2145191_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_310_SR（17m56s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425090,unitId:1003406380})">计算机网络MOOC_308_滑动窗口协议</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426070,unitId:1003406381})">计算机网络MOOC_309_GBN</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426071,unitId:1003406382})">计算机网络MOOC_310_SR</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第6周 传输层（下）（2h05m14s） </b><br>
+        
+            3.6 面向连接传输协议-TCP（53m38s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143125_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_311_TCP概述（11m11s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2144108_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_312_TCP可靠数据传输（21m57s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2145192_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_313_TCP流量控制（5m09s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2146120_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_314_TCP连接管理（15m21s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424065,unitId:1003406387})">计算机网络MOOC_311_TCP概述</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426072,unitId:1003406388})">计算机网络MOOC_312_TCP可靠数据传输</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426073,unitId:1003406389})">计算机网络MOOC_313_TCP流量控制</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424066,unitId:1003406390})">计算机网络MOOC_314_TCP连接管理</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            3.7 拥塞控制原理（34m25s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143126_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_315_拥塞控制原理1（24m15s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2145193_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_316_拥塞控制原理2（10m10s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424067,unitId:1003406393})">计算机网络MOOC_315_拥塞控制原理1</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1426074,unitId:1003406394})">计算机网络MOOC_316_拥塞控制原理2</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            3.8 TCP拥塞控制（34m15s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2144109_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_317_TCP拥塞控制（23m02s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2143127_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_318_TCP性能分析（11m13s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1427066,unitId:1003406397})">计算机网络MOOC_317_TCP拥塞控制</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1424068,unitId:1003406398})">计算机网络MOOC_318_TCP性能分析</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            3.9 传输层总结（2m56s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/16/2146122_hd.mp4" target="_blank" rel="noreferrer">计算机网络MOOC_319_总结（2m56s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1425091,unitId:1003406400})">计算机网络MOOC_319_总结</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第7周 网络层（上）（2h46m43s） </b><br>
+        
+            4.1网络层服务（18m16s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2236003_hd.mp4" target="_blank" rel="noreferrer">网络层服务（18m16s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1567034,unitId:1003406402})">网络层服务</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            4.2 虚电路网络与数据报网络（43m33s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2236004_hd.mp4" target="_blank" rel="noreferrer">虚电路网络（21m52s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238006_hd.mp4" target="_blank" rel="noreferrer">数据报网络（21m41s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1568029,unitId:1003406405})">虚电路网络</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1569044,unitId:1003406406})">数据报网络</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            4.3 IPv4协议（1h44m54s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238005_hd.mp4" target="_blank" rel="noreferrer">IP数据报（21m16s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2237005_hd.mp4" target="_blank" rel="noreferrer">IP数据报分片（22m37s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238007_hd.mp4" target="_blank" rel="noreferrer">IP编址（16m38s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2237007_hd.mp4" target="_blank" rel="noreferrer">有类IP地址（22m57s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2237008_hd.mp4" target="_blank" rel="noreferrer">IP子网与子网划分（21m26s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1567035,unitId:1003406412})">IP数据报</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1568030,unitId:1003406413})">IP数据报分片</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1567036,unitId:1003406414})">IP编址</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1566044,unitId:1003406415})">有类IP地址</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1566045,unitId:1003406416})">IP子网与子网划分</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第8周 网络层（中）（2h08m28s） </b><br>
+        
+            4.4 CIDR与路由聚集（19m29s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2237006_hd.mp4" target="_blank" rel="noreferrer">CIDR与路由聚集（19m59s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578007,unitId:1003406418})">CIDR与路由聚集</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                
+
+            
+        
+            4.5 DHCP协议（18m51s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2243004_hd.mp4" target="_blank" rel="noreferrer">DHCP协议（18m51s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578008,unitId:1003406421})">DHCP协议</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            4.6 NAT（24m37s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2243006_hd.mp4" target="_blank" rel="noreferrer">NAT（24m37s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581005,unitId:1003406423})">NAT</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            4.7 ICMP协议（21m47s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238009_hd.mp4" target="_blank" rel="noreferrer">ICMP协议（21m47s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578009,unitId:1003406425})">ICMP协议</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            4.8 IPv6简介（22m00s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2243005_hd.mp4" target="_blank" rel="noreferrer">IPv6简介（22m00s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578010,unitId:1003406427})">IPv6简介</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            例题讲解（21m44s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/07/2268202_hd.mp4" target="_blank" rel="noreferrer">例题讲解（21m44s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第9周 网络层（下）（2h56m22s） </b><br>
+        
+            4.9 路由算法（1h43m13s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238008_hd.mp4" target="_blank" rel="noreferrer">路由算法（14m26s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/11/06/2410021_hd.mp4" target="_blank" rel="noreferrer">链路状态路由算法（22m35s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2236005_hd.mp4" target="_blank" rel="noreferrer">距离向量路由算法（1）（15m11s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2243007_hd.mp4" target="_blank" rel="noreferrer">距离向量路由算法（2）（29m36s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/07/2268201_hd.mp4" target="_blank" rel="noreferrer">层次化路由（21m25s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579006,unitId:1003406434})">路由算法</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578011,unitId:1003406435})">链路状态路由算法</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580007,unitId:1003406436})">距离向量路由算法（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578012,unitId:1003406437})">距离向量路由算法（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578013,unitId:1003406438})">层次化路由</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            4.10 Internet路由（1h13m09s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2237009_hd.mp4" target="_blank" rel="noreferrer">RIP协议（16m18s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238010_hd.mp4" target="_blank" rel="noreferrer">OSPF协议（16m44s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2236006_hd.mp4" target="_blank" rel="noreferrer">BGP协议（1）（21m40s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/24/2237013_hd.mp4" target="_blank" rel="noreferrer">BGP协议（2）（18m27s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579007,unitId:1003406443})">RIP协议</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580008,unitId:1003406444})">OSPF协议</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578014,unitId:1003406445})">BGP协议（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579008,unitId:1003406446})">BGP协议（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                
+
+            
+        
+    
+        <br> <b>第10周 数据链路层（1h59m14s） </b><br>
+        
+            5.1 数据链路层服务（15m08s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238013_hd.mp4" target="_blank" rel="noreferrer">数据链路层服务（15m08s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581006,unitId:1003406449})">数据链路层服务</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            5.2 差错编码（30m59s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2243013_hd.mp4" target="_blank" rel="noreferrer">差错编码（30m59s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578015,unitId:1003406451})">差错编码</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            5.3 多路访问协议（1h13m07s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238015_hd.mp4" target="_blank" rel="noreferrer">MAC协议（17m45s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238017_hd.mp4" target="_blank" rel="noreferrer">随机访问MAC协议（1）（20m08s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2243012_hd.mp4" target="_blank" rel="noreferrer">随机访问MAC协议（2）（21m43s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2243009_hd.mp4" target="_blank" rel="noreferrer">轮转访问MAC协议（13m31s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580009,unitId:1003406456})">MAC协议</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578016,unitId:1003406457})">随机访问MAC协议（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579009,unitId:1003406458})">随机访问MAC协议（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581007,unitId:1003406459})">轮转访问MAC协议</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第11周 局域网（2h30m58s） </b><br>
+        
+            5.4 ARP协议（28m53s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238016_hd.mp4" target="_blank" rel="noreferrer">ARP协议（1）（17m53s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2243008_hd.mp4" target="_blank" rel="noreferrer">ARP协议（2）（11m00s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581008,unitId:1003406462})">ARP协议（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578017,unitId:1003406463})">ARP协议（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            5.5 以太网（1h03m56s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2237011_hd.mp4" target="_blank" rel="noreferrer">以太网（22m37s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238014_hd.mp4" target="_blank" rel="noreferrer">交换机（1）（13m05s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2243011_hd.mp4" target="_blank" rel="noreferrer">交换机（2）（15m59s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/24/2243014_hd.mp4" target="_blank" rel="noreferrer">虚拟局域网（VLAN）（12m15s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581009,unitId:1003406468})">以太网</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580010,unitId:1003406469})">交换机（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580011,unitId:1003406470})">交换机（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581010,unitId:1003406471})">虚拟局域网（VLAN）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            5.6 PPP协议（20m11s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238018_hd.mp4" target="_blank" rel="noreferrer">PPP协议（20m11s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580012,unitId:1003406473})">PPP协议</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            5.7 802.11无线局域网（37m58s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2237010_hd.mp4" target="_blank" rel="noreferrer">802.11无线局域网（1）（16m12s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/09/23/2238019_hd.mp4" target="_blank" rel="noreferrer">802.11无线局域网（2）（21m36s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578018,unitId:1003406476})">802.11无线局域网（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578019,unitId:1003406477})">802.11无线局域网（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第12周 网络安全基本原理（4h36m31s） </b><br>
+        
+            6.1 网络安全基础（35m24s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2332007_hd.mp4" target="_blank" rel="noreferrer">网络安全现状（14m26s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2334007_hd.mp4" target="_blank" rel="noreferrer">网络安全基本概念（13m51s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2335005_hd.mp4" target="_blank" rel="noreferrer">网络安全拟人模型（07m07s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580013,unitId:1003406481})">网络安全现状</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578020,unitId:1003406482})">网络安全基本概念</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580014,unitId:1003406483})">网络安全拟人模型</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            6.2 网络安全威胁（32m55s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2335006_hd.mp4" target="_blank" rel="noreferrer">网络安全威胁（1）（16m41s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2333012_hd.mp4" target="_blank" rel="noreferrer">网络安全威胁（2）（16m15s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581011,unitId:1003406486})">网络安全威胁（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579010,unitId:1003406487})">网络安全威胁（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            6.3 密码学基础（2h07m16s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2332008_hd.mp4" target="_blank" rel="noreferrer">密码学基础（1）（16m29s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2332009_hd.mp4" target="_blank" rel="noreferrer">密码学基础（2）（21m42s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2334008_hd.mp4" target="_blank" rel="noreferrer">密码学基础（3）（21m53s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2333013_hd.mp4" target="_blank" rel="noreferrer">密码学基础（4）（07m33s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2335007_hd.mp4" target="_blank" rel="noreferrer">密码学基础（5）（13m17s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2334011_hd.mp4" target="_blank" rel="noreferrer">密码学基础（6）（17m37s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2334010_hd.mp4" target="_blank" rel="noreferrer">密码学基础（7）（17m02s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2334009_hd.mp4" target="_blank" rel="noreferrer">密码学基础（8）（11m43s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580015,unitId:1003406496})">密码学基础（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578021,unitId:1003406497})">密码学基础（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579011,unitId:1003406498})">密码学基础（3）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578022,unitId:1003406499})">密码学基础（4）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579012,unitId:1003406500})">密码学基础（5）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578023,unitId:1003406501})">密码学基础（6）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581012,unitId:1003406502})">密码学基础（7）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580016,unitId:1003406503})">密码学基础（8）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            6.4 身份认证（23m12s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2335008_hd.mp4" target="_blank" rel="noreferrer">身份认证（23m12s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579013,unitId:1003406505})">身份认证</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            6.5 消息完整性与数字签名（36m47s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2335009_hd.mp4" target="_blank" rel="noreferrer">消息完整性（21m11s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2332010_hd.mp4" target="_blank" rel="noreferrer">数字签名（15m36s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580017,unitId:1003406508})">消息完整性</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579014,unitId:1003406509})">数字签名</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            6.6 密钥分发与公钥证书（20m57s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2334012_hd.mp4" target="_blank" rel="noreferrer">密钥分发中心（09m39s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2332011_hd.mp4" target="_blank" rel="noreferrer">公钥认证中心（CA）（11m18s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579015,unitId:1003406512})">密钥分发中心</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581013,unitId:1003406513})">公钥认证中心（CA）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+        <br> <b>第13周 网络安全协议与技术（4h14m48s） </b><br>
+        
+            7.1 安全电子邮件（39m54s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2332012_hd.mp4" target="_blank" rel="noreferrer">安全电子邮件基本原理（17m16s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2332013_hd.mp4" target="_blank" rel="noreferrer">安全电子邮件标准（22m38s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581014,unitId:1003406516})">安全电子邮件基本原理</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580018,unitId:1003406517})">安全电子邮件标准</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            7.2 安全套接字层（SSL）（1h07m58s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2333014_hd.mp4" target="_blank" rel="noreferrer">Web应用安全（14m45s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2334015_hd.mp4" target="_blank" rel="noreferrer">SSL（1）（30m46s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2333015_hd.mp4" target="_blank" rel="noreferrer">SSL（2）（15m17s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2332014_hd.mp4" target="_blank" rel="noreferrer">SSL（3）（21m55s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580019,unitId:1003406522})">Web应用安全</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1579016,unitId:1003406523})">SSL（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581015,unitId:1003406524})">SSL（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578024,unitId:1003406525})">SSL（3）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            7.3 IP安全（IPsec）（1h31m06s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2334014_hd.mp4" target="_blank" rel="noreferrer">虚拟专用网（VPN）（20m14s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2335010_hd.mp4" target="_blank" rel="noreferrer">IPsec（1）（10m48s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2334016_hd.mp4" target="_blank" rel="noreferrer">IPsec（2）（18m57s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2333017_hd.mp4" target="_blank" rel="noreferrer">IPsec（3）（12m35s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2335011_hd.mp4" target="_blank" rel="noreferrer">IPsec（4）（10m54s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/24/2333018_hd.mp4" target="_blank" rel="noreferrer">IPsec（5）（17m38s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578025,unitId:1003406532})">虚拟专用网（VPN）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578026,unitId:1003406533})">IPsec（1）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1580020,unitId:1003406534})">IPsec（2）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578027,unitId:1003406535})">IPsec（3）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1578028,unitId:1003406536})">IPsec（4）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1581016,unitId:1003406537})">IPsec（5）</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            7.4 无线局域网安全（31m18s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/10/28/2353001_hd.mp4" target="_blank" rel="noreferrer">无线局域网安全（31m18s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1722019,unitId:1003406539})">无线局域网安全</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+            7.5 防火墙（24m32s）
+            <br>
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                        <a class="c-link" href="http://v.stu.126.net/mooc-video/nos/mp4/2015/11/18/2491001_hd.mp4" target="_blank" rel="noreferrer">防火墙（24m32s）</a><span class="c-label c-label--primary">HD</span>
+                    
+                    </div>
+                    
+                
+                
+
+            
+                
+                    <div class=" o-stack--nowrap o-stack--center ">
+                    
+                    </div>
+                    
+                        <div class=" o-stack--nowrap o-stack--center ">
+                        <a class="c-link" href="javascript:;" target="_blank" onclick="javascript:post(&#39;/api/mooc/get_pdf&#39;, {cid:1715002,unitId:1003406541})">防火墙</a><span class="c-label c-label--warning">PDF</span>
+                        </div>
+                    
+                
+                
+
+            
+        
+    
+
+     </div>
+     <div class="o-block__cell u-border-top u-px-small u-py-tiny">
+         <div class="o-stack o-stack--center o-stack--splitted">
+             <div class="o-stack__cell">
+                 <a class="c-button c-button--labeledAfter c-button--secondary" onclick="javascript:flex()">
+                     微信打赏支持
+                     <i class="c-button__label-icon c-icon c-icon--main">
+                     ♡
+                     </i>
+                 </a>
+             </div>
+
+         </div>
+         <div id="QR" style="display: none;">
+             <div class="o-stack__cell">
+                 <a href="./mooc_files/mm_reward_qrcode.png" target="_blank&gt;">
+                     <img src="./mooc_files/mm_reward_qrcode.png" alt="#" style="width: 300px;height: 300px;">
+                 </a>
+             </div>
+
+         </div>
+      <div class="o-stack o-stack--center o-stack--splitted">
+       <div class="o-stack__cell">
+        <div class="o-stack o-stack--center o-stack--nowrap u-text-capitalize o-stack--tinyGap">
+         <div class="o-stack__cell">
+          <a class="u-block u-text-bare u-color-minor">
+              <span>
+                  <br><p>此系统仅供个人学习、研究之用,请勿用于商业用途</p>
+              </span></a>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="o-block__cell u-p-small u-border-top">
+      <div class="o-stack o-stack--center o-stack--nowrap">
+       <div class="o-stack__cell o-stack__cell--expanded u-mr-tiny">
+        <form class="ng-pristine ng-valid">
+         <input class="u-block u-p-tiny u-border-all u-width-100p" type="text" name="comment" placeholder="有问题或疑问发送邮件feemic@sina.com向作者反馈...">
+        </form>
+       </div>
+       <div class="o-stack__cell">
+        <div class="o-stack o-stack--center o-stack--nowrap _u-ml-tiny">
+         <div class="o-stack__cell">
+          <a class="u-block u-text-bare u-color-minor" href="javascript:void(0)"><i class="c-icon c-icon--main u-mr-mini">  </i></a>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+  </div>
+
+ <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f689c3f35a143e7808aa7773a4d62813";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+    
+    <script src="./mooc_files/jquery.min.js(1).下载"></script>
+    <script src="./mooc_files/bootstrap.min.js.下载"></script>
+  
+
+<div id="download_plus_animation"></div></body></html>
