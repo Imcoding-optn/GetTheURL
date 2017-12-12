@@ -17,10 +17,12 @@ import analyzingString.GetItemChar;
 public class AnalyzingItem {
 
 	private GetItemChar gc = new GetItemChar();//传给处理字符串的类的实例
+	private static int index = 0;//视频排序数
 	/**
 	 * 解析HTML获取视频链接
 	 * */
 	public void GetVedioTags(String HtmlPath) {
+		
 		try {
 			//从本地文件内解析
 			File input = new File(HtmlPath);
@@ -29,6 +31,7 @@ public class AnalyzingItem {
 			//c-link 是视频链接所在a标签的类  这个标签也包含了视频名
 			Elements className = doc.getElementsByClass("c-link");
 			Elements linksTags = className.select("a[href]");//
+			
 			for(Element link:linksTags){
 				//解析视频名
 				String VedioNameChar = link.text();
@@ -43,7 +46,8 @@ public class AnalyzingItem {
 					gc.GetVedioUrl(VedioURL);
 					gc.GetVedioOldName(VedioURL);
 					
-					gc.ReNameVedio(VedioURL, VedioNameChar);
+					gc.ReNameVedio(VedioURL, VedioNameChar,index);
+					index++;
 				}
 				
 //				System.out.println(VedioNameChar);

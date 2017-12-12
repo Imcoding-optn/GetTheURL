@@ -5,6 +5,10 @@ import java.util.regex.Pattern;
 
 import saveInfo.SaveItemChar;
 
+
+/**
+ * 处理解析过来的字符串，提取各种所需的信息
+ * */
 public class GetItemChar {
  	private static SaveItemChar st = new SaveItemChar();
 
@@ -31,10 +35,13 @@ public class GetItemChar {
 	
 	/**
 	 * 生成bat批处理命令 重命名视频
+	 * @param URLChar:视频直链地址 <br />
+	 * @param NewChar:要改成的名字 <br />
+	 * @param index:视频排序数 (一门课总要按顺序来学吧)<br />
 	 * */
-	public  void ReNameVedio(String URLChar,String NewChar){
+	public  void ReNameVedio(String URLChar,String NewChar,int index){
 		String  OldChar = URLChar.substring(URLChar.lastIndexOf("/")+1);
-		String NewName =  "ren "+OldChar+" "+NewChar.replace("？", "")+".mp4";//使用批处理改名   
+		String NewName =  "ren "+OldChar+" "+index+"-"+NewChar.replace("？", "")+".mp4";//使用批处理改名   
 		st.saveFile("重命名命令", NewName);
 	}
 
