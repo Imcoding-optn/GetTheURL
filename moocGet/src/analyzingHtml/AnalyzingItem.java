@@ -42,7 +42,7 @@ public class AnalyzingItem {
 				 * 判断是否是符合要求的URL
 				 * */
 				if(!VedioURL.equals("javascript:;")){
-					gc.GetVedioName(VedioNameChar);//传给处理字符串的类
+					gc.GetVedioName(VedioNameChar,index);//传给处理字符串的类
 					gc.GetVedioUrl(VedioURL);
 					gc.GetVedioOldName(VedioURL);
 					

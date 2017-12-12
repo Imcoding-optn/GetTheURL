@@ -18,9 +18,11 @@ public class GetItemChar {
 	
 	/**
 	 * 得到要给视频重命名的名字
+	 * @param NameChar:新名<br />
+	 * @param index 视频排序数 (一门课总要按顺序来学吧)<br />
 	 * */
-	public  void GetVedioName(String NameChar){
-		st.saveFile("desName.txt", NameChar.replace("？", ""));//除去创建文件名时有影响的字符串  （虽然此处是中文问号  对文件名来说无影响 但是还是去掉）
+	public  void GetVedioName(String NameChar,int index){
+		st.saveFile("desName.txt", index+"-"+NameChar.replace("？", "")+".mp4");//除去创建文件名时有影响的字符串  （虽然此处是中文问号  对文件名来说无影响 但是还是去掉）
 	}
 	
 	/**
@@ -35,9 +37,9 @@ public class GetItemChar {
 	
 	/**
 	 * 生成bat批处理命令 重命名视频
-	 * @param URLChar:视频直链地址 <br />
-	 * @param NewChar:要改成的名字 <br />
-	 * @param index:视频排序数 (一门课总要按顺序来学吧)<br />
+	 * @param URLChar 视频直链地址 <br />
+	 * @param NewChar 要改成的名字 <br />
+	 * @param index 视频排序数 (一门课总要按顺序来学吧)<br />
 	 * */
 	public  void ReNameVedio(String URLChar,String NewChar,int index){
 		String  OldChar = URLChar.substring(URLChar.lastIndexOf("/")+1);
